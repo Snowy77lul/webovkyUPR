@@ -1,74 +1,113 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
   <meta charset="windows-1250">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="./src/output.css" rel="stylesheet">
-  <title>Responsive Sidebar</title>
+  <title>Responzivní stránka s kapitolami</title>
 </head>
-<body class="flex bg-gray-100 min-h-screen">
+<body class="bg-gray-100 text-gray-900">
 
-  <!-- Sidebar.. -->
-  <div 
-    id="sidebar" 
-    class="bg-gray-800 text-white w-20 md:w-24 transition-all duration-300 flex flex-col items-center py-4 fixed md:relative h-full z-20"
-  >
-    <!-- Toggle Button -->
-    <button 
-      id="toggleButton" 
-      class="bg-blue-600 hover:bg-blue-700 rounded p-2 mb-6 w-10 h-10 flex items-center justify-center transition-colors duration-300"
-    >
-      ☰
-    </button>
+  <!-- Průhledný overlay -->
+  <div id="overlay" class="fixed inset-0 bg-transparent hidden z-40"></div>
 
-    <!-- Links -->
-    <div class="flex flex-col space-y-3 w-full items-center">
-      <a href="abtme.html" class="sidebar-link bg-gray-800 rounded px-3 py-2 w-3/4 text-center text-gray-800 transition-colors duration-300">About Me</a>
-      <a href="funny.html" class="sidebar-link bg-gray-800 rounded px-3 py-2 w-3/4 text-center text-gray-800 transition-colors duration-300">Funny</a>
+  <!-- Sidebar -->
+  <div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-800 text-white transform -translate-x-full transition-transform duration-300 z-50 shadow-lg">
+    <div class="p-4 relative">
+      <button id="closeSidebarBtn" class="absolute top-4 right-4 text-white text-2xl font-bold hover:text-gray-300">&times;</button>
+
+      <h2 class="text-xl font-semibold mb-6 mt-8">Menu</h2>
+      <button onclick="window.location.href='aboutme.html'" class="block w-full text-left bg-transparent hover:text-gray-300 py-2">About Me</button>
+      <button onclick="window.location.href='lol.html'" class="block w-full text-left bg-transparent hover:text-gray-300 py-2">LOL</button>
     </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="flex-1 md:ml-24 ml-20 p-6 transition-all duration-300" id="mainContent">
-    <h1 class="text-2xl font-bold mb-4">Hlavní obsah stránky</h1>
-    <p>Tady může být cokoliv — text, obrázky nebo jiný obsah.</p>
+  <!-- Hlavní obsah -->
+  <div class="flex flex-col lg:flex-row min-h-screen">
+
+    <!-- Levá strana -->
+    <div class="w-full lg:w-3/4 p-6 relative overflow-y-auto">
+      <!-- Sidebar button -->
+      <button id="openSidebarBtn" class="fixed lg:absolute top-4 left-4 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 z-30">
+        ☰ Menu
+      </button>
+
+      <h1 class="text-3xl font-bold mb-6 text-center">Moje stránka s kapitolami</h1>
+
+      <div class="space-y-12">
+        <!-- Kapitola 1 -->
+        <section id="kapitola1">
+          <h2 class="text-2xl font-bold mb-2">Kapitola 1</h2>
+          <div class="pl-8 space-y-4 text-gray-800 leading-relaxed">
+            <p>
+              Lorem ipsum loreem sdashbdhsabhdbas
+              dsandbsahbdhasbdhbahsdbahdb
+              dsnjndjandjsnajdnasjndjasnjdnajdnsajdnnds
+            </p>
+
+            <hr class="border-gray-400">
+
+            <p>
+              <button onclick="toggleImage('obrazek1')" class="text-blue-600 underline hover:text-blue-800">Obrázek 1</button>
+            </p>
+            <img id="obrazek1" src="https://via.placeholder.com/400x250?text=Obrázek+1" alt="Obrázek 1" class="hidden mt-2 rounded-lg shadow-md w-full max-w-md">
+
+            <hr class="border-gray-400">
+
+            <p>
+              dloeaidnjsandjsanjdn dsnajdnjsand nsajdnasj nd
+              dsajdnsjandjasndjasnd
+            </p>
+          </div>
+        </section>
+
+        <!-- Kapitola 2 -->
+        <section id="kapitola2">
+          <h2 class="text-2xl font-bold mb-2">Kapitola 2</h2>
+          <div class="pl-8 space-y-4 text-gray-800 leading-relaxed">
+            <p>
+              smdjandjasn lorem ipszn — bez obrázku.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Pravá strana (Legenda) -->
+    <div class="w-full lg:w-1/4 bg-white border-t lg:border-t-0 lg:border-l border-gray-300 p-6 mt-6 lg:mt-0">
+      <h2 class="text-xl font-semibold mb-4">Legenda</h2>
+      <ul class="space-y-3">
+        <li><a href="#kapitola1" class="text-blue-600 hover:text-blue-800 underline">Kapitola 1</a></li>
+        <li><a href="#obrazek1" class="text-blue-600 hover:text-blue-800 underline">Obrázek 1</a></li>
+        <li><a href="#kapitola2" class="text-blue-600 hover:text-blue-800 underline">Kapitola 2</a></li>
+      </ul>
+    </div>
   </div>
 
-  <!-- Script -->
+  <!-- Skripty -->
   <script>
-    const toggleButton = document.getElementById('toggleButton');
     const sidebar = document.getElementById('sidebar');
-    const links = document.querySelectorAll('.sidebar-link');
-    const mainContent = document.getElementById('mainContent');
+    const overlay = document.getElementById('overlay');
+    const openSidebarBtn = document.getElementById('openSidebarBtn');
+    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
 
-    let isExpanded = false;
-
-    toggleButton.addEventListener('click', () => {
-      isExpanded = !isExpanded;
-
-      if (isExpanded) {
-        sidebar.classList.remove('w-20', 'md:w-24');
-        sidebar.classList.add('w-64'); // 256px
-        mainContent.classList.remove('ml-20', 'md:ml-24');
-        mainContent.classList.add('ml-64');
-      } else {
-        sidebar.classList.add('w-20', 'md:w-24');
-        sidebar.classList.remove('w-64');
-        mainContent.classList.add('ml-20', 'md:ml-24');
-        mainContent.classList.remove('ml-64');
-      }
-
-      links.forEach(link => {
-        if (isExpanded) {
-          link.classList.remove('text-gray-800');
-          link.classList.add('text-white', 'bg-gray-700', 'hover:bg-gray-600');
-        } else {
-          link.classList.add('text-gray-800');
-          link.classList.remove('text-white', 'bg-gray-700', 'hover:bg-gray-600');
-        }
-      });
+    openSidebarBtn.addEventListener('click', () => {
+      sidebar.classList.remove('-translate-x-full');
+      overlay.classList.remove('hidden');
     });
-  </script>
 
+    closeSidebarBtn.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    function closeSidebar() {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    }
+
+    function toggleImage(id) {
+      const img = document.getElementById(id);
+      img.classList.toggle('hidden');
+    }
+  </script>
 </body>
 </html>
