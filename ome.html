@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="windows-1250">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./src/output.css" rel="stylesheet">
+  <title>Responzivni stranka s kapitolami</title>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+  <!-- Pr�hledn� overlay -->
+  <div id="overlay" class="fixed inset-0 bg-transparent hidden z-40"></div>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-800 text-white transform -translate-x-full transition-transform duration-300 z-50 shadow-lg">
+    <div class="p-4 relative">
+      <button id="closeSidebarBtn" class="absolute top-4 right-4 text-white text-2xl font-bold hover:text-gray-300">&times;</button>
+
+      <h2 class="text-xl font-semibold mb-6 mt-8">Menu</h2>
+      <button onclick="window.location.href='projekty.html'" class="block w-full text-left bg-transparent hover:text-gray-300 py-2">Projekty</button>
+      <button onclick="window.location.href='main.html'" class="block w-full text-left bg-transparent hover:text-gray-300 py-2">main</button>
+    </div>
+  </div>
+
+  <!-- Hlavn� obsah -->
+  <div class="flex flex-col lg:flex-row min-h-screen">
+
+    <!-- Lev� strana -->
+    <div class="w-full lg:w-3/4 p-6 relative overflow-y-auto">
+      <!-- Sidebar button -->
+      <button id="openSidebarBtn" class="fixed lg:absolute top-4 left-4 bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 z-30">
+        = Menu
+      </button>
+
+      <h1 class="text-3xl font-bold mb-6 text-center">Moje str�nka s kapitolami</h1>
+
+      <div class="space-y-12">
+        <!-- Kapitola 1 -->
+        <section id="kapitola1">
+          <h2 class="text-2xl font-bold mb-2">Kapitola 1</h2>
+          <div class="pl-8 space-y-4 text-gray-800 leading-relaxed">
+            <p>
+              Lorem ipsum loreem sdashbdhsabhdbas
+              dsandbsahbdhasbdhbahsdbahdb
+              dsnjndjandjsnajdnasjndjasnjdnajdnsajdnnds
+            </p>
+
+            <hr class="border-gray-400">
+
+            <p>
+              <button onclick="toggleImage('obrazek1')" class="text-blue-600 underline hover:text-blue-800">Obr�zek 1</button>
+            </p>
+            <img id="obrazek1" src="https://via.placeholder.com/400x250?text=Obr�zek+1" alt="Obr�zek 1" class="hidden mt-2 rounded-lg shadow-md w-full max-w-md">
+
+            <hr class="border-gray-400">
+
+            <p>
+              dloeaidnjsandjsanjdn dsnajdnjsand nsajdnasj nd
+              dsajdnsjandjasndjasnd
+            </p>
+          </div>
+        </section>
+
+        <!-- Kapitola 2 -->
+        <section id="kapitola2">
+          <h2 class="text-2xl font-bold mb-2">Kapitola 2</h2>
+          <div class="pl-8 space-y-4 text-gray-800 leading-relaxed">
+            <p>
+              smdjandjasn lorem ipszn � bez obr�zku.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Prav� strana (Legenda) -->
+    <div class="w-full lg:w-1/4 bg-white border-t lg:border-t-0 lg:border-l border-gray-300 p-6 mt-6 lg:mt-0">
+      <h2 class="text-xl font-semibold mb-4">Legenda</h2>
+      <ul class="space-y-3">
+        <li><a href="#kapitola1" class="text-blue-600 hover:text-blue-800 underline">Kapitola 1</a></li>
+        <li><a href="#obrazek1" class="text-blue-600 hover:text-blue-800 underline">Obr�zek 1</a></li>
+        <li><a href="#kapitola2" class="text-blue-600 hover:text-blue-800 underline">Kapitola 2</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Skripty -->
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const openSidebarBtn = document.getElementById('openSidebarBtn');
+    const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+
+    openSidebarBtn.addEventListener('click', () => {
+      sidebar.classList.remove('-translate-x-full');
+      overlay.classList.remove('hidden');
+    });
+
+    closeSidebarBtn.addEventListener('click', closeSidebar);
+    overlay.addEventListener('click', closeSidebar);
+
+    function closeSidebar() {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    }
+
+    function toggleImage(id) {
+      const img = document.getElementById(id);
+      img.classList.toggle('hidden');
+    }
+  </script>
+</body>
+</html>
